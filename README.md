@@ -132,3 +132,16 @@ child3 = fork();
 * ```char *argv[] = {"mv", folder_name, "/home/gun/modul2/sedaap/", NULL}; execv("/bin/mv", argv);``` Memindahkan file tersebut ke directory sedaap menggunakan exec
 * ```closedir(dir);``` menutup directory
 
+Screenshot jawaban soal 3
+<p align="center">
+  <img src="https://imgur.com/qnNnH99.png" width="350" title="1">
+</p>
+<p align="center">
+  <img src="https://imgur.com/M6iGCZk.png" width="350" title="1">
+</p>
+<p align="center">
+  <img src="https://imgur.com/LTSe9xw.png" width="350" title="1">
+</p>
+<p align="center">
+  <img src="https://imgur.com/S1tOLvi.png" width="350" title="1">
+</p>
