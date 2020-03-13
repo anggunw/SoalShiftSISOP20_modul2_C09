@@ -41,7 +41,8 @@ void genKillProgram(int pid, int code)
 	remove("kill.c");
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
   pid_t pid, sid;        // Variabel untuk menyimpan PID
 
   pid = fork();     // Menyimpan PID dari Child Process
@@ -75,46 +76,46 @@ int main(int argc, char *argv[]) {
 
   while (1) {
     int code = 1;
-if(argv[1] == "-a")
-{
-	code = 1;
-	if (child_id == 0)
-	{
-		char *argv[]={"./kill",NULL};
-		execvp(argv[0],argv);
-	}
+  if(argv[1] == "-a")
+  {
+  	code = 1;
+  	if (child_id == 0)
+  	{
+  		char *argv[]={"./kill",NULL};
+  		execvp(argv[0],argv);
+  	}
 
-	else
-	{
-		char *argv[] = {"cc", "-o", "./kill", "./kill.c", NULL};
-		execv("/usr/bin/cc", argv);
-	}
+  	else
+  	{
+  		char *argv[] = {"cc", "-o", "./kill", "./kill.c", NULL};
+  		execv("/usr/bin/cc", argv);
+  	}
+    genKillProgram(pid, code);
+  }
 
-}
+  else if(argv[1] == "-b")
+  {
+  	code = 2;
+  	if (child_id == 0)
+  	{
+  		// this is child
+  		char *argv[]={"./kill",NULL};
+      execvp(argv[0],argv);
+  	}
 
-else if(argv[1] == "-b")
-{
-	code = 2;
-	if (child_id == 0)
-	{
-		// this is child
-		char *argv[]={"./kill",NULL};
-    execvp(argv[0],argv);
-	}
+  	else
+  	{
+  		// this is parent
+      char *argv[] = {"cc", "-o", "./kill", "./kill.c", NULL};
+      execv("/usr/bin/cc", argv);
+  	}
+    genKillProgram(pid, code);
+  }
 
-	else
-	{
-		// this is parent
-    char *argv[] = {"cc", "-o", "./kill", "./kill.c", NULL};
-    execv("/usr/bin/cc", argv);
-	}
-
-}
-
-else
-{
-	exit(EXIT_FAILURE);
-}
+  else
+  {
+  	exit(EXIT_FAILURE);
+  }
 
     char folder_name[80] = "/home/gun/";
     char temp[30];
@@ -123,9 +124,9 @@ else
     int status;
 
     pid_t child_a, child_a2, child_b;
-    
+
     child_a = fork();
-    
+
     // NO 2A - MEMBUAT FOLDER SETIAP 30 DETIK
     if(child_a == 0){
       time (&rawtime);
@@ -139,7 +140,7 @@ else
         char *argv[] = {"mkdir", folder_name, NULL};
         execv("/bin/mkdir", argv);
       }
-      
+
       while ((wait(&status)) > 0);
       // NO 2B - DOWNLOAD 20 GAMBAR SETIAP 5 DETIK
       for(int i=0;i<20;i++){
@@ -157,7 +158,7 @@ else
           char file_name[30];
           time (&rawtime);
           info = localtime(&rawtime);
-          strftime(file_name, 30, "%Y-%m-%d_%X", info); 
+          strftime(file_name, 30, "%Y-%m-%d_%X", info);
 
           // url to download
           char url[] = "https://picsum.photos/";
