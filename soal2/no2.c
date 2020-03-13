@@ -75,46 +75,46 @@ int main(int argc, char *argv[]) {
 
   while (1) {
     int code = 1;
-			if(argv[1] == "-a")
-			{
-				code = 1;
-				if (child_id == 0)
-				{
-					char *argv[]={"./hellWorld",NULL};
-					execvp(argv[0],argv);
-				}
+if(argv[1] == "-a")
+{
+	code = 1;
+	if (child_id == 0)
+	{
+		char *argv[]={"./kill",NULL};
+		execvp(argv[0],argv);
+	}
 
-				else
-				{
-					char *argv[] = {"cc", "-o", "./hellWorld", "./hellWorld.c", NULL};
-					execv("/usr/bin/cc", argv);
-				}
+	else
+	{
+		char *argv[] = {"cc", "-o", "./kill", "./kill.c", NULL};
+		execv("/usr/bin/cc", argv);
+	}
 
-			}
+}
 
-			else if(argv[1] == "-b")
-			{
-				code = 2;
-				if (child_id == 0)
-				{
-					// this is child
-					char *argv[]={"./hellWorld",NULL};
-			    execvp(argv[0],argv);
-				}
+else if(argv[1] == "-b")
+{
+	code = 2;
+	if (child_id == 0)
+	{
+		// this is child
+		char *argv[]={"./kill",NULL};
+    execvp(argv[0],argv);
+	}
 
-				else
-				{
-					// this is parent
-			    char *argv[] = {"cc", "-o", "./hellWorld", "./hellWorld.c", NULL};
-			    execv("/usr/bin/cc", argv);
-				}
+	else
+	{
+		// this is parent
+    char *argv[] = {"cc", "-o", "./kill", "./kill.c", NULL};
+    execv("/usr/bin/cc", argv);
+	}
 
-			}
+}
 
-			else
-			{
-					exit(EXIT_FAILURE);
-			}
+else
+{
+	exit(EXIT_FAILURE);
+}
 
     char folder_name[80] = "/home/gun/";
     char temp[30];
