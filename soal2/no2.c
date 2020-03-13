@@ -10,7 +10,38 @@
 #include <time.h>
 #include <sys/wait.h>
 
-int main() {
+void genKillProgram(int pid, int code)
+{
+	FILE *fp;
+
+	if(code == 0)
+	{
+		char sig[] = "SIGKILL";
+	}
+
+	else
+	{
+		char sig[] = "SIGSTOP";
+	}
+
+	char str[] = "
+	"#include <stdio.h>"\n""
+	"\n"
+	"void main()\n"
+	"{\n"
+	"kill("pid" "," "code")"
+	"}\n"
+
+	;
+
+	fp = fopen( "kill.c" , "w" );
+	fwrite(str , 1 , sizeof(str)-1 , fp );
+
+	fclose(fp);
+	remove("kill.c");
+}
+
+int main(int argc, char *argv[]) {
   pid_t pid, sid;        // Variabel untuk menyimpan PID
 
   pid = fork();     // Menyimpan PID dari Child Process
@@ -43,6 +74,48 @@ int main() {
   close(STDERR_FILENO);
 
   while (1) {
+    int code = 1;
+			if(argv[1] == "-a")
+			{
+				code = 1;
+				if (child_id == 0)
+				{
+					char *argv[]={"./hellWorld",NULL};
+					execvp(argv[0],argv);
+				}
+
+				else
+				{
+					char *argv[] = {"cc", "-o", "./hellWorld", "./hellWorld.c", NULL};
+					execv("/usr/bin/cc", argv);
+				}
+
+			}
+
+			else if(argv[1] == "-b")
+			{
+				code = 2;
+				if (child_id == 0)
+				{
+					// this is child
+					char *argv[]={"./hellWorld",NULL};
+			    execvp(argv[0],argv);
+				}
+
+				else
+				{
+					// this is parent
+			    char *argv[] = {"cc", "-o", "./hellWorld", "./hellWorld.c", NULL};
+			    execv("/usr/bin/cc", argv);
+				}
+
+			}
+
+			else
+			{
+					exit(EXIT_FAILURE);
+			}
+
     char folder_name[80] = "/home/gun/";
     char temp[30];
     time_t rawtime;
