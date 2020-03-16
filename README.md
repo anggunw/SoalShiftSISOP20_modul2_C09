@@ -8,6 +8,7 @@
 
 
 ## Soal 1 <a name="soal1"></a>
+```
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -102,28 +103,30 @@ int main(int argc, char *argv[])
 
   return 0;
 }
+```
 
-*if(argc == 5) 
+* ```if(argc == 5)``` 
   [Memeriksa Jumlah Argumen]
-* time_t rawtime;
+* ```time_t rawtime;
       struct tm *info;
       char buffer[30];
       time( &rawtime );
-      info = localtime( &rawtime );
+      info = localtime( &rawtime );```
   [Mendapatkan Waktu lokal]
-* sprintf(inittime,"%02d:%02d:%02d\n", c, b, a);
+* ```sprintf(inittime,"%02d:%02d:%02d\n", c, b, a);```
   [assign waktu ke string inittime dengan format diatas]
-* status = strcmp(inittime, buffer);
+* ```status = strcmp(inittime, buffer);```
   [Membandingkan input yang dimasukkan sama dengan waktu sekarang atau tidak]
-* if(status == 0)
+* ```if(status == 0)
       {
         char *argv[] = {"bash", path, NULL};
         execv("/bin/bash", argv);
-      }
+      }```
    [Jika nilai status 0 maka bash script dijalankan]
 
 
 ## Soal 2 <a name="soal2"></a>
+```
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -289,28 +292,30 @@ int main(int argc, char *argv[])
     sleep(30);
   }
 }
-* void genKillProgram(int pid, int code)
+```
+
+* ```void genKillProgram(int pid, int code)```
   [Membuat kill program]
-* if(argv[1] == "-a")
+* ```if(argv[1] == "-a")```
   [Memeriksa Argumen]
-* char *argv[]={"./kill",NULL};
+* ```char *argv[]={"./kill",NULL};```
   execvp(argv[0],argv);
   [Child jalankan script c]
-*  char *argv[] = {"cc", "-o", "./kill", "./kill.c", NULL};
-   execv("/usr/bin/cc", argv);
+*  ```char *argv[] = {"cc", "-o", "./kill", "./kill.c", NULL};
+   execv("/usr/bin/cc", argv);```
    [Parent men compile script c]
-*  time (&rawtime);
+*  ```time (&rawtime);
    info = localtime(&rawtime);
-   strftime(file_name, 30, "%Y-%m-%d_%X", info);
+   strftime(file_name, 30, "%Y-%m-%d_%X", info);```
    [Mendapatkan waktu lokal]	
-*  char *argv[] = {"wget", url, "-O", file_path, NULL};
-   execv("/usr/bin/wget", argv);
+*  ```char *argv[] = {"wget", url, "-O", file_path, NULL};
+   execv("/usr/bin/wget", argv);```
    [Mendownload dari link char]
-*  char zip_name[50];
+*  ```char zip_name[50];
    strcpy(zip_name, temp);
    strcat(zip_name, "/");
    char *argv[] = {"zip", temp, "-r", "-m", zip_name, NULL};
-   execv("/usr/bin/zip", argv);
+   execv("/usr/bin/zip", argv);```
    [Melakukan zip pada file]
 	
 	
