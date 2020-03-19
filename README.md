@@ -448,7 +448,7 @@ Waktu pembuatan folder indomie
 
 Waktu pembuatan folder sedaap
 <p align="center">
-  <img src="https://imgur.com/fl39UBF" width="350" title="1">
+  <img src="https://imgur.com/fl39UBF.png" width="350" title="1">
 </p>
 
 Isi folder modul 2
