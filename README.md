@@ -439,15 +439,34 @@ child3 = fork();
 * ```closedir(dir);``` menutup directory
 
 Screenshot jawaban soal 3
+
+Waktu pembuatan folder indomie
+
+<p align="center">
+  <img src="https://imgur.com/1BQrcaT.png" width="350" title="1">
+</p>
+
+Waktu pembuatan folder sedaap
+<p align="center">
+  <img src="https://imgur.com/fl39UBF" width="350" title="1">
+</p>
+
+Isi folder modul 2
 <p align="center">
   <img src="https://imgur.com/qnNnH99.png" width="350" title="1">
 </p>
+
+Isi folder Indomie
 <p align="center">
   <img src="https://imgur.com/M6iGCZk.png" width="350" title="1">
 </p>
+
+Isi folder 744.jpg
 <p align="center">
   <img src="https://imgur.com/LTSe9xw.png" width="350" title="1">
 </p>
+
+Isi folder sedaap
 <p align="center">
   <img src="https://imgur.com/S1tOLvi.png" width="350" title="1">
 </p>
