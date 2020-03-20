@@ -23,6 +23,7 @@ void failure()
 
 int main(int argc, char *argv[])
 {
+
   pid_t pid, sid;
   pid = fork();
 
@@ -47,7 +48,7 @@ int main(int argc, char *argv[])
 
   if(argc != 5)
     failure();
-    
+
   while (1)
   {
     int len, a, b, c, s1, s2, s3, b1, b2, b3, timing;
@@ -98,7 +99,7 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); 
+        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
       }
 
       if (child_id == 0)
@@ -114,7 +115,7 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); 
+        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
       }
 
       if (child_id == 0)
@@ -130,7 +131,7 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); 
+        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
       }
 
       if (child_id == 0)
@@ -146,7 +147,8 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); 
+        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
+      }
 
       if (child_id == 0)
       {
@@ -161,7 +163,7 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); 
+        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
       }
 
       if (child_id == 0)
@@ -177,7 +179,7 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); 
+        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
       }
 
       if (child_id == 0)
@@ -193,7 +195,7 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); 
+        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
       }
 
       if (child_id == 0)
