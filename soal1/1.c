@@ -52,8 +52,7 @@ int main(int argc, char *argv[])
   {
     int len, a, b, c, s1, s2, s3, b1, b2, b3, timing;
     char dettime[30], mentime[30], jamtime[30], i[2],k[2],j[2], path[30];
-    //printf("Script executed\n");
-    ///*
+
     a = atoi(argv[1]);
     b = atoi(argv[2]);
     c = atoi(argv[3]);
@@ -67,7 +66,6 @@ int main(int argc, char *argv[])
     if(c > 23 || c < 0)
       failure();
 
-    //printf("Argument yang dimasukkan valid\n");
     sprintf(dettime,"%02d\n", a);
     sprintf(mentime,"%02d\n", b);
     sprintf(jamtime,"%02d\n", c);
@@ -92,19 +90,6 @@ int main(int argc, char *argv[])
     b1 = strcmp(argv[1], "*");
     b2 = strcmp(argv[2], "*");
     b3 = strcmp(argv[3], "*");
-    //printf("%d %d %d\n", s1, s2, s3);
-    //printf("%d %d %d\n", b1, b2, b3);
-    /*
-    printf("%s\n", buffdet);
-    printf("%s\n", buffmen);
-    printf("%s\n", buffjam);
-    printf("s1 = %d\n", s1);
-    printf("s2 = %d\n", s2);
-    printf("s3 = %d\n", s3);
-    printf("b1 = %d\n", b1);
-    printf("b2 = %d\n", b2);
-    printf("b3 = %d\n", b3);
-    */
 
     if(b1 == 0 && b2 == 0 && b3 == 0)
     {
@@ -113,7 +98,7 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
+        exit(EXIT_FAILURE); 
       }
 
       if (child_id == 0)
@@ -129,7 +114,7 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
+        exit(EXIT_FAILURE); 
       }
 
       if (child_id == 0)
@@ -145,7 +130,7 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
+        exit(EXIT_FAILURE); 
       }
 
       if (child_id == 0)
@@ -161,8 +146,7 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
-      }
+        exit(EXIT_FAILURE); 
 
       if (child_id == 0)
       {
@@ -177,7 +161,7 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
+        exit(EXIT_FAILURE); 
       }
 
       if (child_id == 0)
@@ -193,7 +177,7 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
+        exit(EXIT_FAILURE); 
       }
 
       if (child_id == 0)
@@ -209,7 +193,7 @@ int main(int argc, char *argv[])
 
       if (child_id < 0)
       {
-        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
+        exit(EXIT_FAILURE); 
       }
 
       if (child_id == 0)
