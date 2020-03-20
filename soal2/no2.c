@@ -12,39 +12,52 @@
 
 void genKillProgram(int pid, int code)
 {
-	FILE *fp;
+  FILE *fp = fopen("killer.sh", "w+");
+  if(code == 0)
+  {
+    fprintf(fp, "#!/bin/bash\n");
+    fprintf(fp, "kill -9 %d \n", pid);
 
-	if(code == 0)
-	{
-		char sig[] = "SIGKILL";
-	}
+    fclose(fp);
+  }
 
-	else
-	{
-		char sig[] = "SIGSTOP";
-	}
+  else if(code == 1)
+  {
+    fprintf(fp, "#!/bin/bash\n");
+    fprintf(fp, "kill -15 %d \n", pid);
 
-	char str[] = "
-	"#include <stdio.h>"\n""
-	"\n"
-	"void main()\n"
-	"{\n"
-	"kill("pid" "," "code")"
-	"}\n"
+    fclose(fp);
 
-	;
+    remove("killer.sh");
+  }
 
-	fp = fopen( "kill.c" , "w" );
-	fwrite(str , 1 , sizeof(str)-1 , fp );
+  else
+  {
+    exit(EXIT_FAILURE);
+  }
 
-	fclose(fp);
-	remove("kill.c");
+  pid_t child_id;
+  child_id = fork();
+
+   if (child_id < 0)
+     exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
+
+   if (child_id == 0) {
+     // this is child
+     remove("killer.sh");
+   }
+
+   else {
+     // this is parent
+     char *argv[] = {"bash", "killer.sh", "/home/gun/", NULL};
+     execv("/bin/bash", argv);
+   }
 }
 
 int main(int argc, char *argv[])
 {
+  //Generate Program Killer
   pid_t pid, sid;        // Variabel untuk menyimpan PID
-
   pid = fork();     // Menyimpan PID dari Child Process
 
   /* Keluar saat fork gagal
@@ -74,56 +87,15 @@ int main(int argc, char *argv[])
   close(STDOUT_FILENO);
   close(STDERR_FILENO);
 
-  while (1) {
-    int code = 1;
-  if(argv[1] == "-a")
+  while (1)
   {
-  	code = 1;
-  	if (child_id == 0)
-  	{
-  		char *argv[]={"./kill",NULL};
-  		execvp(argv[0],argv);
-  	}
-
-  	else
-  	{
-  		char *argv[] = {"cc", "-o", "./kill", "./kill.c", NULL};
-  		execv("/usr/bin/cc", argv);
-  	}
-    genKillProgram(pid, code);
-  }
-
-  else if(argv[1] == "-b")
-  {
-  	code = 2;
-  	if (child_id == 0)
-  	{
-  		// this is child
-  		char *argv[]={"./kill",NULL};
-      execvp(argv[0],argv);
-  	}
-
-  	else
-  	{
-  		// this is parent
-      char *argv[] = {"cc", "-o", "./kill", "./kill.c", NULL};
-      execv("/usr/bin/cc", argv);
-  	}
-    genKillProgram(pid, code);
-  }
-
-  else
-  {
-  	exit(EXIT_FAILURE);
-  }
-
     char folder_name[80] = "/home/gun/";
     char temp[30];
     time_t rawtime;
     struct tm *info;
     int status;
 
-    pid_t child_a, child_a2, child_b;
+    pid_t child_a, child_a2, child_b, child_c;
 
     child_a = fork();
 
@@ -179,12 +151,46 @@ int main(int argc, char *argv[])
         sleep(5);
       }
       waitpid(child_b, &status, 0);
-      // NO 2C - ZIP FOLDER
-      char zip_name[50];
-      strcpy(zip_name, temp);
-      strcat(zip_name, "/");
-      char *argv[] = {"zip", temp, "-r", "-m", zip_name, NULL};
-      execv("/usr/bin/zip", argv);
+      // NO 2C - ZIP FOLDER & DELETE
+      child_c = fork();
+
+      if(child_c == 0)
+      {
+        char *argv[] = {"rm", "-r", temp, NULL};
+        execv("/usr/bin/rm", argv);
+      }
+
+      else
+      {
+        char zip_name[50];
+        strcpy(zip_name, temp);
+        strcat(zip_name, "/");
+        char *argv[] = {"zip", temp, "-r", "-m", zip_name, NULL};
+        execv("/usr/bin/zip", argv);
+      }
+
+
+
+      int pid = getpid();
+      int code = 0;
+
+      if(argc == 1)
+      {
+        if(strcmp(argv[1], "-a") == 0)
+          code = 0;
+        else if(strcmp(argv[1], "-b") == 0)
+          code = 1;
+        else
+          exit(EXIT_FAILURE);
+      }
+
+      else
+      {
+        exit(EXIT_FAILURE);
+      }
+
+      genKillProgram(pid, code);
+
     }
     sleep(30);
   }
