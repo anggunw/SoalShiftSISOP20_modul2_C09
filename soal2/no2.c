@@ -153,6 +153,9 @@ int main(int argc, char *argv[])
       waitpid(child_b, &status, 0);
       // NO 2C - ZIP FOLDER & DELETE
       child_c = fork();
+      char zip_name[50];
+      strcpy(zip_name, temp);
+      strcat(zip_name, "/");
 
       if(child_c == 0)
       {
@@ -162,9 +165,6 @@ int main(int argc, char *argv[])
 
       else
       {
-        char zip_name[50];
-        strcpy(zip_name, temp);
-        strcat(zip_name, "/");
         char *argv[] = {"zip", temp, "-r", "-m", zip_name, NULL};
         execv("/usr/bin/zip", argv);
       }
