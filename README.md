@@ -80,9 +80,6 @@ int main(int argc, char *argv[])
     strftime(buffdet,30,"%S", info);
     strftime(buffmen,30,"%M", info);
     strftime(buffjam,30,"%H", info);
-    printf("%s\n", buffdet);
-    printf("%s\n", buffmen);
-    printf("%s\n", buffjam);
     s1 = strcmp(dettime, buffdet);
     s2 = strcmp(mentime, buffmen);
     s3 = strcmp(jamtime, buffjam);
@@ -211,9 +208,34 @@ int main(int argc, char *argv[])
 }
 
 ```
-Pada program diatas akan mengeksekusi file bash dengan jadwal yang telah ditetapkan. Pertama program akan memeriksa apakah jumlah argumen yang dimasukkan benar atau tidak. Jika jumlah argumen benar maka akan diperiksa apakah argumen jam yang dimasukkan benar atau tidak dengan mengubah argumen tersebut menjadi int dan memeriksanya. Jika salah akan menjalankan fungsi failure yang berarti akan keluar. Setelah diperiksa dan argumen semuanya benar maka argumen tersebut akan diassign di variable baru yaitu dettime, mentime, dan jamtime yang nantinya formatnya akan dirumah menjadi %02d yang artinya jika string tersebut kurang dari 10 atau hanya satuan maka akan ditambahkan angka 0 pada string tersebut.
+Pada program diatas akan mengeksekusi file bash dengan jadwal yang telah ditetapkan. Pertama program akan memeriksa apakah jumlah argumen yang dimasukkan benar atau tidak. 
+* ```if(argc != 5) ```
+ika jumlah argumen benar maka akan diperiksa apakah argumen jam yang dimasukkan benar atau tidak dengan mengubah argumen tersebut menjadi int dan memeriksanya. 
+*``` a = atoi(argv[1]); if(a > 59 || a < 0); failure();```
 
-Selanjutnya akan didapatkan local time dari komputer dengan menggunakan tm_t dan dari situ akan diassign lagi variable local_time kedalam buffdet, buffmen, dan buffjam yang berarti ketiga variable tersebut berisi waktu sekarang dan akan diupdate seterusnya. Setelah jam lokal didapat maka bisa dibandingkan semua variable tersebut seperti apakah jam sekarang sama dengan argumen atau argumen merupakan bintang. Jika bintang maka akan dilaksanakan setiap waktu. Lalu dengan perbandingan tersebut didapatkan dilakukan pengecekan dan jika benar maka akan dieksekusi bashnya. 
+Jika salah akan menjalankan fungsi failure yang berarti akan keluar. Setelah diperiksa dan argumen semuanya benar maka argumen tersebut akan diassign di variable baru yaitu dettime, mentime, dan jamtime yang nantinya formatnya akan dirumah menjadi %02d yang artinya jika string tersebut kurang dari 10 atau hanya satuan maka akan ditambahkan angka 0 pada string tersebut.
+*```sprintf(dettime,"%02d\n", a);```
+Selanjutnya akan didapatkan local time dari komputer dengan menggunakan tm_t dan dari situ akan diassign lagi variable local_time kedalam buffdet, buffmen, dan buffjam yang berarti ketiga variable tersebut berisi waktu sekarang dan akan diupdate seterusnya. 
+*```strftime(buffdet,30,"%S", info);```
+Setelah jam lokal didapat maka bisa dibandingkan semua variable tersebut seperti apakah jam sekarang sama dengan argumen atau argumen merupakan bintang. Jika bintang maka akan dilaksanakan setiap waktu. Lalu dengan perbandingan tersebut didapatkan dilakukan pengecekan.
+*```s1 = strcmp(dettime, buffdet);```
+*```b1 = strcmp(argv[1], "*");```
+Setelah di compare selanjutnya akan membandingkan dengan argumen kapan akan dijalakan dan dieksekusi bashnya dengan membuat child baru lalu menjalankan fungsi eksekusi.
+*```if(b1 == 0 && b2 == 0 && b3 == 0)
+    {
+      pid_t child_id;
+      child_id = fork();
+
+      if (child_id < 0)
+      {
+        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
+      }
+
+      if (child_id == 0)
+      {
+        execution(path);
+      }
+    }```
 
 
 ## Soal 2 <a name="soal2"></a>
