@@ -223,6 +223,15 @@ Setelah jam lokal didapat maka bisa dibandingkan semua variable tersebut seperti
 Setelah di compare selanjutnya akan membandingkan dengan argumen kapan akan dijalakan dan dieksekusi bashnya dengan membuat child baru lalu menjalankan fungsi eksekusi.
 *```if(b1 == 0 && b2 == 0 && b3 == 0) pid_t child_id; child_id = fork(); if (child_id == 0); execution(path);```
 
+Screenshot jawaban soal 1
+<p align="center">
+  <img src="https://imgur.com/IhMHvpI.png" width="350" title="1">
+</p>
+<p align="center">
+  <img src="https://imgur.com/W6bkYSq.png" width="350" title="1">
+</p>
+
+
 
 ## Soal 2 <a name="soal2"></a>
 ```
@@ -445,6 +454,14 @@ int main(int argc, char *argv[])
 KENDALA :
 c. zip file
 e. meneksekusi killer seusai argument
+
+Screenshot jawaban soal 2
+<p align="center">
+  <img src="https://imgur.com/tBmPS7S.png" width="350" title="1">
+</p>
+<p align="center">
+  <img src="https://imgur.com/ctmPSEw.png" width="350" title="1">
+</p>
 	
 ## Soal 3 <a name="soal3"></a>
 ```
