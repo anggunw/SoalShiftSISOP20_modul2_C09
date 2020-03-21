@@ -221,21 +221,7 @@ Setelah jam lokal didapat maka bisa dibandingkan semua variable tersebut seperti
 *```s1 = strcmp(dettime, buffdet);```
 *```b1 = strcmp(argv[1], "*");```
 Setelah di compare selanjutnya akan membandingkan dengan argumen kapan akan dijalakan dan dieksekusi bashnya dengan membuat child baru lalu menjalankan fungsi eksekusi.
-*```if(b1 == 0 && b2 == 0 && b3 == 0)
-    {
-      pid_t child_id;
-      child_id = fork();
-
-      if (child_id < 0)
-      {
-        exit(EXIT_FAILURE); // Jika gagal membuat proses baru, program akan berhenti
-      }
-
-      if (child_id == 0)
-      {
-        execution(path);
-      }
-    }```
+*```if(b1 == 0 && b2 == 0 && b3 == 0) pid_t child_id; child_id = fork(); if (child_id == 0); execution(path);```
 
 
 ## Soal 2 <a name="soal2"></a>
