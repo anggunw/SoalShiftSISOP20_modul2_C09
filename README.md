@@ -222,24 +222,12 @@ int main(int argc, char *argv[])
 
 ```
 
-* ```if(argc == 5)``` 
-  [Memeriksa Jumlah Argumen]
-* ```time_t rawtime;
-      struct tm *info;
-      char buffer[30];
-      time( &rawtime );
-      info = localtime( &rawtime );```
-  [Mendapatkan Waktu lokal]
-* ```sprintf(inittime,"%02d:%02d:%02d\n", c, b, a);```
-  [assign waktu ke string inittime dengan format diatas]
-* ```status = strcmp(inittime, buffer);```
-  [Membandingkan input yang dimasukkan sama dengan waktu sekarang atau tidak]
-* ```if(status == 0)
-      {
-        char *argv[] = {"bash", path, NULL};
-        execv("/bin/bash", argv);
-      }```
-   [Jika nilai status 0 maka bash script dijalankan]
+* ```if(argc == 5)``` [Memeriksa Jumlah Argumen]
+* ```time_t rawtime; struct tm *info; char buffer[30]; time( &rawtime ); info = localtime( &rawtime );```
+[Mendapatkan Waktu lokal]
+* ```sprintf(inittime,"%02d:%02d:%02d\n", c, b, a);``` [assign waktu ke string inittime dengan format tersebut]
+* ```status = strcmp(inittime, buffer);``` [Membandingkan input yang dimasukkan sama dengan waktu sekarang atau tidak]
+* ```if(status == 0){ char *argv[] = {"bash", path, NULL}; execv("/bin/bash", argv);}``` [Jika nilai status 0 maka bash script dijalankan]
 
 
 ## Soal 2 <a name="soal2"></a>
@@ -443,29 +431,13 @@ int main(int argc, char *argv[])
 }
 ```
 
-* ```void genKillProgram(int pid, int code)```
-  [Membuat kill program]
-* ```if(argv[1] == "-a")```
-  [Memeriksa Argumen]
-* ```char *argv[]={"./kill",NULL};```
-  execvp(argv[0],argv);
-  [Child jalankan script c]
-*  ```char *argv[] = {"cc", "-o", "./kill", "./kill.c", NULL};
-   execv("/usr/bin/cc", argv);```
-   [Parent men compile script c]
-*  ```time (&rawtime);
-   info = localtime(&rawtime);
-   strftime(file_name, 30, "%Y-%m-%d_%X", info);```
-   [Mendapatkan waktu lokal]	
-*  ```char *argv[] = {"wget", url, "-O", file_path, NULL};
-   execv("/usr/bin/wget", argv);```
-   [Mendownload dari link char]
-*  ```char zip_name[50];
-   strcpy(zip_name, temp);
-   strcat(zip_name, "/");
-   char *argv[] = {"zip", temp, "-r", "-m", zip_name, NULL};
-   execv("/usr/bin/zip", argv);```
-   [Melakukan zip pada file]
+* ```void genKillProgram(int pid, int code)``` [Membuat kill program]
+* ```if(argv[1] == "-a")``` [Memeriksa Argumen]
+* ```char *argv[]={"./kill",NULL};execvp(argv[0],argv);``` [Child jalankan script c]
+* ```char *argv[] = {"cc", "-o", "./kill", "./kill.c", NULL}; execv("/usr/bin/cc", argv); ``` [Parent men compile script c]
+* ```time (&rawtime); info = localtime(&rawtime); strftime(file_name, 30, "%Y-%m-%d_%X", info);```[Mendapatkan waktu lokal]	
+* ```char *argv[] = {"wget", url, "-O", file_path, NULL}; execv("/usr/bin/wget", argv);```[Mendownload dari link char]
+* ```char zip_name[50]; strcpy(zip_name, temp); strcat(zip_name, "/"); char *argv[] = {"zip", temp, "-r", "-m", zip_name, NULL}; execv("/usr/bin/zip", argv); ```[Melakukan zip pada file]
 	
 	
 ## Soal 3 <a name="soal3"></a>
