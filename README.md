@@ -9,16 +9,6 @@
 
 ## Soal 1 <a name="soal1"></a>
 ```
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <unistd.h>
-#include <syslog.h>
-#include <string.h>
-#include <time.h>
 
 void execution(char path[])
 {
@@ -221,13 +211,9 @@ int main(int argc, char *argv[])
 }
 
 ```
+Pada program diatas akan mengeksekusi file bash dengan jadwal yang telah ditetapkan. Pertama program akan memeriksa apakah jumlah argumen yang dimasukkan benar atau tidak. Jika jumlah argumen benar maka akan diperiksa apakah argumen jam yang dimasukkan benar atau tidak dengan mengubah argumen tersebut menjadi int dan memeriksanya. Jika salah akan menjalankan fungsi failure yang berarti akan keluar. Setelah diperiksa dan argumen semuanya benar maka argumen tersebut akan diassign di variable baru yaitu dettime, mentime, dan jamtime yang nantinya formatnya akan dirumah menjadi %02d yang artinya jika string tersebut kurang dari 10 atau hanya satuan maka akan ditambahkan angka 0 pada string tersebut.
 
-* ```if(argc == 5)``` [Memeriksa Jumlah Argumen]
-* ```time_t rawtime; struct tm *info; char buffer[30]; time( &rawtime ); info = localtime( &rawtime );```
-[Mendapatkan Waktu lokal]
-* ```sprintf(inittime,"%02d:%02d:%02d\n", c, b, a);``` [assign waktu ke string inittime dengan format tersebut]
-* ```status = strcmp(inittime, buffer);``` [Membandingkan input yang dimasukkan sama dengan waktu sekarang atau tidak]
-* ```if(status == 0){ char *argv[] = {"bash", path, NULL}; execv("/bin/bash", argv);}``` [Jika nilai status 0 maka bash script dijalankan]
+Selanjutnya akan didapatkan local time dari komputer dengan menggunakan tm_t dan dari situ akan diassign lagi variable local_time kedalam buffdet, buffmen, dan buffjam yang berarti ketiga variable tersebut berisi waktu sekarang dan akan diupdate seterusnya. Setelah jam lokal didapat maka bisa dibandingkan semua variable tersebut seperti apakah jam sekarang sama dengan argumen atau argumen merupakan bintang. Jika bintang maka akan dilaksanakan setiap waktu. Lalu dengan perbandingan tersebut didapatkan dilakukan pengecekan dan jika benar maka akan dieksekusi bashnya. 
 
 
 ## Soal 2 <a name="soal2"></a>
@@ -431,14 +417,17 @@ int main(int argc, char *argv[])
 }
 ```
 
-* ```void genKillProgram(int pid, int code)``` [Membuat kill program]
-* ```if(argv[1] == "-a")``` [Memeriksa Argumen]
-* ```char *argv[]={"./kill",NULL};execvp(argv[0],argv);``` [Child jalankan script c]
-* ```char *argv[] = {"cc", "-o", "./kill", "./kill.c", NULL}; execv("/usr/bin/cc", argv); ``` [Parent men compile script c]
+* ```char *argv[] = {"mkdir", folder_name, NULL}; execv("/bin/mkdir", argv);```  [Membuat directori per 30 detik]
+* ```strcat(url, file_size); ``` [Mendownload gambar sesuai URL]
+* ```char *argv[] = {"wget", url, "-O", file_path, NULL}; execv("/usr/bin/wget", argv);``` [Mendownload gambar dengan format tertentu per 5 detik]
+* ```strcat(file_path, file_name);``` [Mendapatkan lokasi download]
 * ```time (&rawtime); info = localtime(&rawtime); strftime(file_name, 30, "%Y-%m-%d_%X", info);```[Mendapatkan waktu lokal]	
 * ```char *argv[] = {"wget", url, "-O", file_path, NULL}; execv("/usr/bin/wget", argv);```[Mendownload dari link char]
 * ```char zip_name[50]; strcpy(zip_name, temp); strcat(zip_name, "/"); char *argv[] = {"zip", temp, "-r", "-m", zip_name, NULL}; execv("/usr/bin/zip", argv); ```[Melakukan zip pada file]
-	
+* ```char *argv[] = {"rm", "-r", temp, NULL}; execv("/usr/bin/rm", argv);```  [Menghapus directori beserta isinya]
+* ``` if(strcmp(argv[1], "-a") == 0); else if(strcmp(argv[1], "-b") == 0);```  [Memeriksa argumen apakah -a atau -b]
+* ```genKillProgram(pid, code);```  [Menjalankan fungsi yang akan membuat program killer dan menghapus program itu sendiri]
+
 	
 ## Soal 3 <a name="soal3"></a>
 ```
