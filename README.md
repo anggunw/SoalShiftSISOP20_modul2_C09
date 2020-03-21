@@ -245,6 +245,7 @@ void genKillProgram(int pid, int code)
   {
     fprintf(fp, "#!/bin/bash\n");
     fprintf(fp, "kill -9 %d \n", pid);
+    fprintf(fp, "rm -- \"$0\"");
 
     fclose(fp);
   }
@@ -253,10 +254,10 @@ void genKillProgram(int pid, int code)
   {
     fprintf(fp, "#!/bin/bash\n");
     fprintf(fp, "kill -15 %d \n", pid);
+    fprintf(fp, "rm -- \"$0\"");
 
     fclose(fp);
 
-    remove("killer.sh");
   }
 
   else
@@ -272,12 +273,11 @@ void genKillProgram(int pid, int code)
 
    if (child_id == 0) {
      // this is child
-     remove("killer.sh");
    }
 
    else {
      // this is parent
-     char *argv[] = {"bash", "killer.sh", "/home/gun/", NULL};
+     char *argv[] = {"bash", "killer.sh", "/home/farrelmt/", NULL};
      execv("/bin/bash", argv);
    }
 }
@@ -287,6 +287,7 @@ int main(int argc, char *argv[])
   //Generate Program Killer
   pid_t pid, sid;        // Variabel untuk menyimpan PID
   pid = fork();     // Menyimpan PID dari Child Process
+  int killpid = getpid();
 
   /* Keluar saat fork gagal
   * (nilai variabel pid < 0) */
@@ -317,7 +318,7 @@ int main(int argc, char *argv[])
 
   while (1)
   {
-    char folder_name[80] = "/home/gun/";
+    char folder_name[80] = "/home/farrelmt/";
     char temp[30];
     time_t rawtime;
     struct tm *info;
@@ -343,10 +344,12 @@ int main(int argc, char *argv[])
 
       while ((wait(&status)) > 0);
       // NO 2B - DOWNLOAD 20 GAMBAR SETIAP 5 DETIK
-      for(int i=0;i<20;i++){
+      for(int i=0;i<20;i++)
+      {
         child_b = fork();
 
-        if(child_b == 0){
+        if(child_b == 0)
+        {
           // get epoch unix
           time_t seconds;
           seconds = time(NULL);
@@ -376,30 +379,32 @@ int main(int argc, char *argv[])
           char *argv[] = {"wget", url, "-O", file_path, NULL};
           execv("/usr/bin/wget", argv);
         }
+
+        if(i == 19)
+        {
+          // NO 2C - ZIP FOLDER & DELETE
+          child_c = fork();
+          char zip_name[50];
+          strcpy(zip_name, temp);
+          strcat(zip_name, "/");
+
+          if(child_c == 0)
+          {
+            char *argv[] = {"rm", "-r", temp, NULL};
+            execv("/usr/bin/rm", argv);
+          }
+
+          else
+          {
+            //char *argv[] = {"zip", temp, "-r", "-m", zip_name, NULL};
+            //execv("/usr/bin/zip", argv);
+          }
+        }
         sleep(5);
       }
+
       waitpid(child_b, &status, 0);
-      // NO 2C - ZIP FOLDER & DELETE
-      child_c = fork();
-      char zip_name[50];
-      strcpy(zip_name, temp);
-      strcat(zip_name, "/");
 
-      if(child_c == 0)
-      {
-        char *argv[] = {"rm", "-r", temp, NULL};
-        execv("/usr/bin/rm", argv);
-      }
-
-      else
-      {
-        char *argv[] = {"zip", temp, "-r", "-m", zip_name, NULL};
-        execv("/usr/bin/zip", argv);
-      }
-
-
-
-      int pid = getpid();
       int code = 0;
 
       if(argc == 1)
@@ -417,12 +422,13 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
       }
 
-      genKillProgram(pid, code);
+      genKillProgram(killpid, code);
 
     }
     sleep(30);
   }
 }
+
 ```
 
 * ```char *argv[] = {"mkdir", folder_name, NULL}; execv("/bin/mkdir", argv);```  [Membuat directori per 30 detik]
@@ -436,6 +442,9 @@ int main(int argc, char *argv[])
 * ``` if(strcmp(argv[1], "-a") == 0); else if(strcmp(argv[1], "-b") == 0);```  [Memeriksa argumen apakah -a atau -b]
 * ```genKillProgram(pid, code);```  [Menjalankan fungsi yang akan membuat program killer dan menghapus program itu sendiri]
 
+KENDALA :
+c. zip file
+e. meneksekusi killer seusai argument
 	
 ## Soal 3 <a name="soal3"></a>
 ```
